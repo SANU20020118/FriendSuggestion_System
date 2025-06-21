@@ -53,7 +53,7 @@ This project simulates a basic social network and chat application. It demonstra
 ## 📁 File Structure
 
 
-project_root/
+Friend_Suggestion_Chat_System/
 ├── app.py                     # Main Flask application with all routes (login, friends, chat)
 ├── bfs.py                     # Implementation of the Breadth-First Search algorithm
 ├── friends.json               # Stores the social graph data (who is friends with whom)
