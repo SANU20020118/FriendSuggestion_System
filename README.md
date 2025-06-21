@@ -1,6 +1,8 @@
 # 🤝 Friend Suggestion and Chat System
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Flask-2.x-lightgrey?logo=flask)](https://flask.palletsprojects.com/)
 
 An interactive web application built with Flask that allows users to manage friend connections, get friend suggestions using graph algorithms, and engage in real-time (basic) chat conversations.
 
