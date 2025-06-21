@@ -1,5 +1,7 @@
 # 🤝 Friend Suggestion and Chat System
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 An interactive web application built with Flask that allows users to manage friend connections, get friend suggestions using graph algorithms, and engage in real-time (basic) chat conversations.
 
 ---
@@ -15,7 +17,7 @@ An interactive web application built with Flask that allows users to manage frie
     -   [Installation](#installation)
 -   [Usage](#usage)
     -   [Running the Application](#running-the-application)
-    -   [User Login / Get Suggestions](#user-login--get-suggestions)
+    -   [Get Suggestions](#user-login--get-suggestions)
     -   [Adding/Removing Friends](#addingremoving-friends)
     -   [Chatting with Friends](#chatting-with-friends)
     -   [Unread Message Indicators](#unread-message-indicators)
@@ -50,6 +52,19 @@ This project simulates a basic social network and chat application. It demonstra
 
 ## 📁 File Structure
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 project_root/
 ├── app.py                     # Main Flask application with all routes (login, friends, chat)
 ├── bfs.py                     # Implementation of the Breadth-First Search algorithm
@@ -61,6 +76,19 @@ project_root/
 └── static/                    # Static assets (CSS, images)
 ├── styles.css             # Custom CSS for styling the application
 └── cooky_and_friends.jpg  # Image used in the UI
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## ⚙️ Getting Started
