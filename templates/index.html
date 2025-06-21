@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Friend Suggestion System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <div class="left-half">
+        <div class="friends-forever-text">friends forever</div>
+        <img src="{{ url_for('static', filename='cooky_and_friends.jpg') }}" alt="Friends" class="left-image">
+    </div>
+    <div class="right-half">
+        <div class="container">
+            <h1>Friend Suggestion System</h1>
+
+            <form method="POST" class="user-form">
+                <input type="text" name="user" placeholder="Enter User Name" required>
+                <button type="submit">Get Suggestions</button>
+            </form>
+
+            {% if error_message %}
+            <div style="color: red; text-align: center; font-weight: bold; margin-top: 10px;">
+                {{ error_message }}
+            </div>
+            {% endif %}
+
+            <div class="friend-forms">
+                <form method="POST" action="{{ url_for('add_friend') }}">
+                    <input type="text" name="user1" placeholder="User 1" required>
+                    <input type="text" name="user2" placeholder="User 2" required>
+                    <button type="submit">Add Friend</button>
+                </form>
+            </div>
+
+            {% if user %}
+            <h2>-:Suggested Friends for {{ user.capitalize() }}:-</h2>
+            <div class="card-container">
+                {% for friend in suggestions %}
+                <div class="card profile-card" data-user-id="{{ friend }}">
+                    <span class="message-notification" id="notification-{{ friend }}">
+                        {% if unread_info.get(friend) and unread_info[friend].has_unread %}
+                        {{ unread_info[friend].unread_count }}
+                        {% endif %}
+                    </span>
+                    <div class="profile-pic">{{ friend[0]|upper }}{{ friend[1]|upper }}</div>
+                    <h3>{{ friend.capitalize() }}</h3>
+                    <div class="button-group">
+                        {% if friend in direct_friends %}
+                        <a href="{{ url_for('chat', user=user, friend=friend) }}" class="chat-button">Chat</a>
+                        <form method="POST" action="{{ url_for('remove_friend') }}" style="display: inline;">
+                            <input type="hidden" name="user1" value="{{ user }}">
+                            <input type="hidden" name="user2" value="{{ friend }}">
+                            <button type="submit" class="remove-button">Remove</button>
+                        </form>
+                        {% else %}
+                        <form method="POST" action="{{ url_for('add_friend') }}" style="display: inline;">
+                            <input type="hidden" name="user1" value="{{ user }}">
+                            <input type="hidden" name="user2" value="{{ friend }}">
+                            <button type="submit" class="add-button">Add Friend</button>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const userForm = document.querySelector('.user-form');
+            const suggestionsContainer = document.querySelector('.card-container');
+
+            if (userForm) {
+                userForm.addEventListener('submit', function (event) {
+                    event.preventDefault();
+                    const usernameInput = this.querySelector('input[name="user"]');
+                    const username = usernameInput.value.toLowerCase();
+
+                    if (username) {
+                        fetchAndDisplayUnread(username);
+                        this.submit();
+                    }
+                });
+            }
+
+            const initialUser = "{{ user }}";
+            if (initialUser && suggestionsContainer) {
+                fetchAndDisplayUnread(initialUser);
+            }
+
+            function fetchAndDisplayUnread(username) {
+                fetch(`/api/users/unread?user=${username}`)
+                    .then(response => response.json())
+                    .then(unreadData => {
+                        if (suggestionsContainer) {
+                            suggestionsContainer.querySelectorAll('.profile-card').forEach(card => {
+                                const friendId = card.dataset.userId;
+                                const notificationSpan = card.querySelector('.message-notification');
+                                if (notificationSpan) {
+                                    if (unreadData[friendId] && unreadData[friendId].has_unread) {
+                                        notificationSpan.classList.add('has-unread');
+                                        notificationSpan.textContent = unreadData[friendId].unread_count || '';
+                                    } else {
+                                        notificationSpan.classList.remove('has-unread');
+                                        notificationSpan.textContent = '';
+                                    }
+                                }
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error fetching unread message data:", error);
+                    });
+            }
+        });
+    </script>
+</body>
+
+</html>

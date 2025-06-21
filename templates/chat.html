@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chat with {{ friend.capitalize() }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <div class="left-half"></div>
+    <div class="right-half">
+        <div class="chat-container">
+            <h1>Chat between {{ user.capitalize() }} and {{ friend.capitalize() }}</h1>
+
+            <div class="messages">
+                {% for msg in messages %}
+                <div class="message {% if msg.sender == current_user %}user-sent{% else %}other-received{% endif %}">
+                    <strong>{{ msg.sender.capitalize() }}:</strong> {{ msg.text }}
+                </div>
+                {% endfor %}
+            </div>
+
+            <form method="POST" class="send-message-form">
+                <input type="text" name="message" placeholder="Type your message..." required>
+                <button type="submit" class="send-button">Send</button>
+            </form>
+
+            <div class="centered">
+                <a href="{{ url_for('home') }}" class="back-button">⬅️ Back to Home</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
