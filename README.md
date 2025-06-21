@@ -65,6 +65,7 @@ project_root/
 ├── styles.css             # Custom CSS for styling the application
 └── cooky_and_friends.jpg  # Image used in the UI
 
+---
 
 ## ⚙️ Getting Started
 
