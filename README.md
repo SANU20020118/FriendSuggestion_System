@@ -53,18 +53,6 @@ This project simulates a basic social network and chat application. It demonstra
 ## 📁 File Structure
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 project_root/
 ├── app.py                     # Main Flask application with all routes (login, friends, chat)
 ├── bfs.py                     # Implementation of the Breadth-First Search algorithm
@@ -76,19 +64,6 @@ project_root/
 └── static/                    # Static assets (CSS, images)
 ├── styles.css             # Custom CSS for styling the application
 └── cooky_and_friends.jpg  # Image used in the UI
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ## ⚙️ Getting Started
